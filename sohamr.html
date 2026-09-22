@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Birthday 🎂</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3, #6a5af9);
+            overflow: hidden;
+        }
+
+        /* Background glow */
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            filter: blur(50px);
+            z-index: -1;
+        }
+
+        body::before {
+            top: -80px;
+            left: -80px;
+        }
+
+        body::after {
+            bottom: -80px;
+            right: -80px;
+        }
+
+        .card {
+            width: 90%;
+            max-width: 500px;
+            padding: 40px 25px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            color: white;
+            animation: cardAppear 1.2s ease;
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.7) translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .emoji {
+            font-size: 65px;
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        h1 {
+            margin-top: 15px;
+            font-size: clamp(35px, 10vw, 60px);
+            text-shadow: 0 0 15px rgba(255,255,255,0.8);
+        }
+
+        h2 {
+            margin-top: 10px;
+            font-size: clamp(22px, 6vw, 32px);
+            color: #fff;
+        }
+
+        p {
+            margin: 20px auto;
+            font-size: 18px;
+            line-height: 1.6;
+            max-width: 400px;
+        }
+
+        button {
+            border: none;
+            padding: 14px 28px;
+            border-radius: 30px;
+            background: white;
+            color: #ff4f81;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        button:hover {
+            transform: scale(1.08);
+            background: #fff0f5;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 18px;
+            top: -20px;
+            z-index: 10;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .card {
+                padding: 30px 20px;
+            }
+
+            .emoji {
+                font-size: 55px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+
+            button {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+
+        <div class="emoji">🎂</div>
+
+        <h1>Happy Birthday!</h1>
+
+        <!-- Change the name here -->
+        <h2>Dear khushi  ❤️</h2>
+
+        <p>
+            Wishing you a day filled with happiness, laughter,
+            beautiful memories and lots of surprises! 🎉
+            May all your dreams come true. ✨
+        </p>
+
+        <button onclick="startCelebration()">
+            🎉 Celebrate Again
+        </button>
+
+        <div class="footer">
+            Made with ❤️ for a special birthday
+        </div>
+
+    </div>
+
+    <script>
+
+        function createConfetti() {
+
+            const colors = [
+                "#ff4757",
+                "#ffd32a",
+                "#1e90ff",
+                "#2ed573",
+                "#ff6b81",
+                "#a55eea",
+                "#ffffff"
+            ];
+
+            for (let i = 0; i < 120; i++) {
+
+                const confetti = document.createElement("div");
+
+                confetti.classList.add("confetti");
+
+                confetti.style.left =
+                    Math.random() * 100 + "vw";
+
+                confetti.style.backgroundColor =
+                    colors[Math.floor(Math.random() * colors.length)];
+
+                confetti.style.animationDuration =
+                    (Math.random() * 3 + 2) + "s";
+
+                confetti.style.animationDelay =
+                    Math.random() * 2 + "s";
+
+                confetti.style.transform =
+                    `rotate(${Math.random() * 360}deg)`;
+
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 6000);
+            }
+        }
+
+        function startCelebration() {
+            createConfetti();
+        }
+
+        // Start automatically
+        window.onload = function () {
+            createConfetti();
+        };
+
+    </script>
+
+</body>
+</html>
